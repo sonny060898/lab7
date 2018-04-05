@@ -185,7 +185,7 @@ the values provided by the constructor?
 ....................................................................*)
 
 class rect (p : point) (w : float) (h : float) : shape =
-object (this)
+object
 
   (* instance variables that store the rect's properties *)
   val mutable pos = p      (* lower left corner of rectangle *)
@@ -245,8 +245,8 @@ rect! In this case, we've left its implementation entirely up to you.
 ......................................................................*)
 
 class square (p : point) (s : float) : shape =
-object(this)
-  inherit rect p s s as super
+object
+  inherit rect p s s
 end ;;
 
 (* Recall one of the original motivations for these exercises. We
@@ -408,7 +408,7 @@ existing classes, you should only need to implement a single method.
 class rect_quad (p : point) (w : float) (h : float) : quad =
   object
     inherit rect p w h
-    method sides = w, w, h, h
+    method sides = w, h, w, h
   end ;;
 
 
