@@ -410,8 +410,11 @@ existing classes, you should only need to implement a single method.
 
 class rect_quad (p : point) (w : float) (h : float) : quad =
   object
-    inherit rect p w h
-    method sides = w, h, w, h
+    inherit rect p w h as super
+    method sides =
+      let (llx, lly), (uux, uuy) = super#bounding_box in
+      let width, height = uux -. llx, uuy -. lly in
+      width, height, width, height
   end ;;
 
 
