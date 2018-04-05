@@ -334,10 +334,10 @@ position.
 ......................................................................*)
 
 class square_center_scale (p: point) (s: float) : shape =
-  object (this)
+  object
     inherit rect p s s as super
     method! scale (k : float) : unit =
-      super#scale k;
+      super#scale k; super#translate ((1. -. k), (1. -. k))
   end
 
 (* Before we move on, consider: do you need to make any modifications
@@ -405,11 +405,12 @@ that implements a quad class type. Hint: By taking advantage of
 existing classes, you should only need to implement a single method.
 ......................................................................*)
 
-(* UNCOMMENT ME
 class rect_quad (p : point) (w : float) (h : float) : quad =
   object
+    inherit rect p w h
+    method sides = w, h, w, h
   end ;;
- *)
+
 
 (*......................................................................
 Exercise 4B: Complete a class, square_quad, that represents a square
@@ -417,11 +418,12 @@ that implements a quad class type. Hint: you shouldn't need to
 implement any methods!
 ......................................................................*)
 
-(* UNCOMMENT ME
 class square_quad (p : point) (s : float) : quad =
   object
+    inherit square p s
+    method sides = s, s, s, s
   end ;;
-*)
+
 
 (* Remember Exercise 2D, in which you implemented an area function for
 shapes? Amazingly, even though we have continued to create new shapes,
