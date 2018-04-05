@@ -337,7 +337,7 @@ class square_center_scale (p: point) (s: float) : shape =
   object (this)
     inherit rect p s s as super
     method! scale (k : float) : unit =
-      super#scale k; super#translate
+      super#scale k;
   end
 
 (* Before we move on, consider: do you need to make any modifications
