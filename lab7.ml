@@ -334,10 +334,13 @@ position.
 ......................................................................*)
 
 class square_center_scale (p: point) (s: float) : shape =
-  object
+  object (this)
     inherit rect p s s as super
     method! scale (k : float) : unit =
-      super#scale k; super#translate ((1. -. k), (1. -. k))
+      let (x1, x2) = this#center in
+      super#scale k;
+      let (nx1, nx2) = this#center in
+      super#translate (x1 -. nx1, x2 -. nx2)
   end
 
 (* Before we move on, consider: do you need to make any modifications
