@@ -408,7 +408,7 @@ existing classes, you should only need to implement a single method.
 class rect_quad (p : point) (w : float) (h : float) : quad =
   object
     inherit rect p w h
-    method sides = w, h, w, h
+    method sides = w, w, h, h
   end ;;
 
 
@@ -436,19 +436,18 @@ pass it to the area function to find out its area and store the result
 in a variable "a".
 ......................................................................*)
 
-(* UNCOMMENT ME
-let sq : quad = .. ;;
+let sq : quad = new square_quad (1., 1.) 1. ;;
 
-let a = .. ;;
-*)
+let a = area (sq :> shape) ;;
+
 
 (*......................................................................
 Exercise 4D: Write a function, area_list, that accepts a list of
 shapes and returns a list of areas.
 ......................................................................*)
 
-let area_list (lst : shape list) : float list =
-  failwith "area_list not implemented" ;;
+let area_list : shape list -> float list =
+  List.map (fun x -> area (x :> shape)) ;;
 
 (* This works because of *dynamic dispatch*; we decide the code to run
 at run-time instead of compile-time. In other words, the shape#area
